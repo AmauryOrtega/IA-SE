@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
+//CLIPS 1. Importando de CLIPSJNI.jar
+
+import javax.swing.JOptionPane;
 import net.sf.clipsrules.jni.*;
-/**
- *
- * @author Juan Benítez
- */
 
 public class Clips extends javax.swing.JDialog {
 
     /**
      * Creates new form Clips
      */
-     private Environment clips;
+    //CLIPS 2. Se añade un atributo Environment para tener acceso a la base
+    //         de conocimiento
+    private Environment clips;
+
     public Clips(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        //CLIPS 3. Se crea y se carga la base de conocimiento en el atributo 
+        //          atributo clips de tipo Environment
         clips = new Environment();
         clips.load("programa.clp");
         initComponents();
@@ -145,13 +144,32 @@ public class Clips extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
+        //CLIPS 3. Se hace uso de (reset) para preparar los hechos de la base de 
+        //          conocimiento usando los deffacts que estan en ella
         clips.reset();
-        String material = (String)jCBMaterial.getSelectedItem();
-        String Extintor = (String)jCBExtintor.getSelectedItem();
-        clips.eval("(assert (se-quema "+material+"))");
-        clips.eval("(assert (tengo-extintor-de "+Extintor+"))");
+
+        //CLIPS 4. Se añaden los hechos que el usuario ingresa
+        String material = (String) jCBMaterial.getSelectedItem();
+        String Extintor = (String) jCBExtintor.getSelectedItem();
+        clips.eval("(assert (se-quema " + material + "))");
+        clips.eval("(assert (tengo-extintor-de " + Extintor + "))");
+        
+        //CLIPS 5. Se ejecutan los hechos que estan almacenados en la agenda de clips
         clips.run();
         
+        //CLIPS 6. Se busca el valor de la variable global y se determina si puede apagar el incendio
+        String evalString = "?*global-var*";
+        PrimitiveValue rv;
+        rv = clips.eval("?*global-var*");
+        try {
+            if (rv.toString().equals("\"puedo-apagar\"")) {
+                JOptionPane.showMessageDialog(this, "Puedes apagar el incendio con ese extintor");
+            } else {
+                JOptionPane.showMessageDialog(this, "Moriras");
+            }
+        } catch (Exception e) {
+            System.out.println("Problemas leyendo variable global de clips");
+        }
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     /**
@@ -168,16 +186,24 @@ public class Clips extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Clips.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clips.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Clips.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clips.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Clips.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clips.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Clips.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clips.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
