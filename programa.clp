@@ -1,3 +1,5 @@
+;Variable global para leer desde java
+(defglobal ?*global-var* = "")
 (deffacts inicio
 	(materiales A papel madera tela)
 	(materiales B aceite gas lubricante)
@@ -31,6 +33,7 @@
 (defrule vivir
 	(puedo-apagar)
 	=>
+        (bind ?*global-var* "puedo-apagar") 
 	(printout t "Viviras" crlf)
 )
 

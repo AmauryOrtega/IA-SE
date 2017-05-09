@@ -1,19 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
-/**
- *
- * @author Juan Benítez
- */
 public class Inicio extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Inicio
-     */
     public Inicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -49,7 +37,7 @@ public class Inicio extends javax.swing.JDialog {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Sistema Experto");
+        jLabel1.setText("Sistema Experto para incendios - Juan Benitez & Amaury Ortega");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,22 +70,15 @@ public class Inicio extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBClipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClipsActionPerformed
-      
         Clips clips = new Clips(null, true);
         clips.setVisible(true);
-        
-        
     }//GEN-LAST:event_jBClipsActionPerformed
 
     private void jBPrologActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrologActionPerformed
-        
         Prolog prolog = new Prolog(null, true);
         prolog.setVisible(true);
     }//GEN-LAST:event_jBPrologActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
