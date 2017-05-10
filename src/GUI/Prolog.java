@@ -1,8 +1,6 @@
 package GUI;
-
-//Importamos la libreria para poder trabajar con Prolog en Java
+//PROLOG 1. Importando de jpl.jar
 import org.jpl7.*;
-
 
 import javax.swing.JOptionPane;
 
@@ -135,22 +133,26 @@ public class Prolog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
-       
-        String t1 = "consult('programa.pl')"; // Cargamos la Base de Conocimientos
-        Query q1 = new Query(t1);
-        System.out.println(t1 + "  " + (q1.hasMoreSolutions() ? "Correcto" : "Falso")); // Comprobamos si se conecto correctamente
-        Query q2 = new Query("puedoApagar(papel)"); //Preguntamos si puedo apagar Z
-        /**System.out.println(" "+(q2.hasMoreSolutions() ? "si": "no"));**/
-        String res  = "";
-        Atom a = new Atom(res);
+        //PROLOG 2. Se crea un query para cargar la base de conocimientos
+        Query q1 = new Query("consult('programa.pl')");
+        //PROLOG 3. Hay que terminar la ejecucion de q1 verificando sus soluciones
+        //          Aqui se retorna true o false
+        q1.hasSolution();
+        //Debugging
+        //System.out.println(t1 + "  " + (q1.hasMoreSolutions() ? "Correcto" : "Falso")); // Comprobamos si se conecto correctamente
         
-        try{
-        res = "" + q2.oneSolution().get("Z"); //Obtenemos el valor de Z en caso de que si se pueda apagar
-        System.out.println("res " + res);
-        }catch(Exception e){
-            System.out.println("No se puede apaagr");
+        //PROLOG 4. Se extrae lo que el usuario ingresa
+        String material = (String) jCBMaterial.getSelectedItem();
+        String extintor = (String) jCBExtintor.getSelectedItem();
+        //PROLOG 4. Se preara un query consultando a la base de conocimiento
+        //          Usando la entrada del usuario
+        Query q2 = new Query("puedoApagar(" + material + ", " + extintor + ")");
+        //PROLOG 5. Se consulta si q2 retorno true o false
+        if(q2.hasSolution()){
+            JOptionPane.showMessageDialog(this, "Puedes apagar el incendio con ese extintor");
+        }else{
+            JOptionPane.showMessageDialog(this, "Moriras");
         }
-
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     /**

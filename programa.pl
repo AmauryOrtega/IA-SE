@@ -20,13 +20,6 @@ extintor(b, sustancia-quimica-seca).
 extintor(c, co2).
 extintor(c, espuma).
 
-puedo(apagar).
-
-%HECHOS 2 - Entrada de usuario
-seQuema(papel).
-extintorDe(agua).
-
 %REGLAS
-tipoIncendio(Y) :- material(Y, X), seQuema(X).
-tipoExtintor(Y) :- extintor(Y, X), extintorDe(X).
-puedoApagar(Z) :- tipoIncendio(X), tipoExtintor(X), puedo(Z).
+% X=material y Y=extintor de y C=tipo incendio
+puedoApagar(X, Y) :- material(C, X), extintor(C, Y).

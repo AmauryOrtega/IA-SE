@@ -1,14 +1,10 @@
 package GUI;
 //CLIPS 1. Importando de CLIPSJNI.jar
-
-import javax.swing.JOptionPane;
 import net.sf.clipsrules.jni.*;
+import javax.swing.JOptionPane;
 
 public class Clips extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Clips
-     */
     //CLIPS 2. Se añade un atributo Environment para tener acceso a la base
     //         de conocimiento
     private Environment clips;
