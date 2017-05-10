@@ -1,5 +1,8 @@
 package GUI;
 
+//Importamos la libreria para poder trabajar con Prolog en Java
+import org.jpl7.*;
+
 
 import javax.swing.JOptionPane;
 
@@ -132,7 +135,21 @@ public class Prolog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
-        //CODIGO
+       
+        String t1 = "consult('programa.pl')"; // Cargamos la Base de Conocimientos
+        Query q1 = new Query(t1);
+        System.out.println(t1 + "  " + (q1.hasMoreSolutions() ? "Correcto" : "Falso")); // Comprobamos si se conecto correctamente
+        Query q2 = new Query("puedoApagar(papel)"); //Preguntamos si puedo apagar Z
+        /**System.out.println(" "+(q2.hasMoreSolutions() ? "si": "no"));**/
+        String res  = "";
+        Atom a = new Atom(res);
+        
+        try{
+        res = "" + q2.oneSolution().get("Z"); //Obtenemos el valor de Z en caso de que si se pueda apagar
+        System.out.println("res " + res);
+        }catch(Exception e){
+            System.out.println("No se puede apaagr");
+        }
 
     }//GEN-LAST:event_jBAceptarActionPerformed
 
