@@ -75,7 +75,8 @@ public class Inicio extends javax.swing.JDialog {
     }//GEN-LAST:event_jBClipsActionPerformed
 
     private void jBPrologActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrologActionPerformed
-        //Llama por consola a python
+        Prolog prolog = new Prolog(null, true);
+        prolog.setVisible(true);
     }//GEN-LAST:event_jBPrologActionPerformed
 
     public static void main(String args[]) {
